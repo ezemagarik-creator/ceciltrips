@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-i18n="page_title">Cecilia Kovacs Tours</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "Cq9PacH-N_N_hZ344",
+      });
+   })();
+</script>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img data-src="logo.png" alt="Logo" class="lazy"></div>
+  <nav>
+    <ul>
+      <li><a href="#home" data-section="home" class="active" data-i18n="nav_home">Home</a></li>
+      <li><a href="#destinos" data-section="destinos" data-i18n="nav_destinos">Destinos</a></li>
+      <li><a href="#resenas" data-section="resenas" data-i18n="nav_resenas">Reseñas</a></li>
+      <li><a href="#surf-trips" data-section="surf-trips" data-i18n="nav_surf">Surf Trips</a></li>
+      <li><a href="#contacto" data-section="contacto" data-i18n="nav_contacto">Contacto</a></li>
+    </ul>
+  </nav>
+  <div class="lang-switch">
+    <button class="flag-btn" data-lang="es">🇦🇷</button>
+    <button class="flag-btn" data-lang="en">🇺🇸</button>
+    <button class="flag-btn" data-lang="pt">🇧🇷</button>
+  </div>
+</header>
+
+<main class="main-background">
+
+  <section id="home" class="section active">
+    <div class="home-wrapper">
+      <h1 data-i18n="home_title">Explora Brasil con Ceci Kovacs</h1>
+      <div class="banner">
+        <img data-src="banner1.jpg" alt="Banner 1" class="lazy">
+        <img data-src="banner2.jpg" alt="Banner 2" class="lazy">
+        <img data-src="banner3.jpg" alt="Banner 3" class="lazy">
+      </div>
+      <div class="tips">
+        <h2 data-i18n="tips_title">Tips de Viaje</h2>
+        <div class="tips-columns">
+          <div class="tip-col">
+            <h3 data-i18n="doc_title">Documentación</h3>
+            <p data-i18n="doc_text">Lleva pasaporte válido y fotocopia de documentos importantes.</p>
+          </div>
+          <div class="tip-col">
+            <h3 data-i18n="moneda_title">Moneda</h3>
+            <p data-i18n="moneda_text">Lleva efectivo y tarjeta de crédito, la app Belo es útil para pagar con PIX.</p>
+          </div>
+          <div class="tip-col">
+            <h3 data-i18n="clima_title">Clima</h3>
+            <p data-i18n="clima_text">Empaca ropa ligera y algo de abrigo para la noche.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="destinos" class="section">
+    <h2 data-i18n="destinos_title">Destinos</h2>
+    <div class="cards-container">
+      <div class="tour-card" data-destino="Búzios">
+        <img class="image" src="buzios.jpg" alt="Búzios">
+        <div class="text-wrapper">
+          <h3 data-i18n="dest_buzios">Búzios</h3>
+          <button data-i18n="btn_info">Más Info</button>
+        </div>
+      </div>
+      <div class="tour-card" data-destino="Río de Janeiro">
+        <img class="image" src="rio.jpg" alt="Río de Janeiro">
+        <div class="text-wrapper">
+          <h3 data-i18n="dest_rio">Río de Janeiro</h3>
+          <button data-i18n="btn_info">Más Info</button>
+        </div>
+      </div>
+      <div class="tour-card" data-destino="Ilha Grande">
+        <img class="image" src="ilha.jpg" alt="Ilha Grande">
+        <div class="text-wrapper">
+          <h3 data-i18n="dest_ilha">Ilha Grande</h3>
+          <button data-i18n="btn_info">Más Info</button>
+        </div>
+      </div>
+      <div class="tour-card" data-destino="Arraial do Cabo">
+        <img class="image" src="arraial.jpg" alt="Arraial do Cabo">
+        <div class="text-wrapper">
+          <h3 data-i18n="dest_arraial">Arraial do Cabo</h3>
+          <button data-i18n="btn_info">Más Info</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resenas" class="section">
+    <h2 data-i18n="resenas_title">Lo que dicen nuestros viajeros</h2>
+    <div class="resenas-carousel-wrapper">
+      <div class="resenas-carousel" id="resenasCarousel">
+        <div class="resena" data-i18n="resena_1">Increíble experiencia en Búzios, volveré pronto.</div>
+        <div class="resena" data-i18n="resena_2">El tour de Río fue perfecto, atención excelente.</div>
+        <div class="resena" data-i18n="resena_3">Ilha Grande es un paraíso, muy recomendable.</div>
+        <div class="resena" data-i18n="resena_4">Atención y organización impecables, repetiría sin dudar.</div>
+        <div class="resena" data-i18n="resena_5">Los guías locales hicieron que todo fuera único.</div>
+        <div class="resena" data-i18n="resena_6">La experiencia de surf fue fantástica, muy seguro y divertido.</div>
+      </div>
+    </div>
+    <div class="cta-experiencia">
+      <a href="mailto:cecikovacsconsultoria@gmail.com" class="btn-mail" data-i18n="btn_experience">Contanos tu experiencia</a>
+    </div>
+  </section>
+
+  <section id="surf-trips" class="section">
+    <h2 data-i18n="surf_title">Surf Trips</h2>
+    <div class="surftrips-gallery">
+      <div class="surf-card"><img src="surf2.jpg" alt="Surf Trip 2"></div>
+      <div class="surf-card"><img src="surf3.jpg" alt="Surf Trip 3"></div>
+      <div class="surf-card"><img src="surf4.jpg" alt="Surf Trip 4"></div>
+      <div class="surf-card"><img src="surf5.jpg" alt="Surf Trip 5"></div>
+      <div class="surf-card"><img src="surf6.jpg" alt="Surf Trip 6"></div>
+      <div class="surf-card"><img src="surf7.jpg" alt="Surf Trip 7"></div>
+      <div class="surf-card"><img src="surf8.jpg" alt="Surf Trip 8"></div>
+      <div class="surf-card"><img src="surf9.jpg" alt="Surf Trip 9"></div>
+      <div class="surf-card"><img src="surf10.jpg" alt="Surf Trip 10"></div>
+    </div>
+    <p class="surf-info" data-i18n="surf_info">Próximamente más info sobre surf trips, paquetes y experiencias.</p>
+  </section>
+
+<section id="contacto" class="section contacto">
+  <h2>Contacto</h2>
+
+  <div class="contacto-contenedor">
+<div class="qr-wrapper">
+  <a href="https://wa.me/19498774072" target="_blank">
+    <img src="qr-wpp.png" alt="Contáctanos por WhatsApp" class="lazy">
+  </a>
+</div>
+</a>
+    </div>
+
+    <div class="redes-sociales">
+      <a href="https://instagram.com/ceciltrips" target="_blank">Instagram</a>
+      <a href="https://facebook.com/ceci.kovacs.5" target="_blank">Facebook</a>
+      <a href="https://ceciltrips.bokun.io" target="_blank">Bokun</a>
+    </div>
+
+<form class="formulario-contacto">
+  <label for="email">Dirección de mail preferida:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="whatsapp">WhatsApp:</label>
+  <input type="tel" id="whatsapp" name="whatsapp" placeholder="+54 9 11 1234 5678" required>
+
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required>
+
+  <label for="personas">Cantidad de personas:</label>
+  <input type="number" id="personas" name="personas" min="1" required>
+
+  <label for="fecha">Fecha:</label>
+  <input type="date" id="fecha" name="fecha" required>
+
+  <label for="servicio">Servicio deseado:</label>
+  <select id="servicio" name="servicio" required>
+    <option value="">-- Seleccionar --</option>
+    <option value="tour">Tour</option>
+    <option value="surf">Surf Trip</option>
+    <option value="transfer">Transfer</option>
+    <option value="hospedaje">Hospedaje</option>
+    <option value="otro">Otro</option>
+  </select>
+
+  <label for="vuelo">Si es desde o al aeropuerto, info del vuelo:</label>
+  <input type="text" id="vuelo" name="vuelo" placeholder="Ej: Nº vuelo, aerolínea, horario">
+
+  <button type="submit">Enviar</button>
+</form>
+  </div>
+</section>
+
+</main> <div id="destino-detalle" class="modal submenu-overlay">
+  <div class="detalle-inner">
+    <div class="modal-header">
+      <h2 id="detalle-titulo">Destino</h2> 
+      <div class="tabs">
+        <button class="tab-btn" data-tab="hospedaje">Hospedaje</button>
+        <button class="tab-btn" data-tab="tours">Tours</button>
+        <button class="tab-btn" data-tab="transfers">Transfers</button>
+      </div>
+      <button id="volver-btn" data-i18n="volver_btn">Volver</button>
+    </div>
+    <div id="hospedaje" class="tab-content"></div>
+    <div id="tours" class="tab-content"></div>
+    <div id="transfers" class="tab-content"></div>
+  </div>
+</div>
+
+<footer>© 2025 Cecilia Kovacs Tours. Todos los derechos reservados.</footer>
+<script src="script.js"></script>
+</body>
+</html>
