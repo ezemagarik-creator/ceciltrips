@@ -135,56 +135,55 @@
   </section>
 
 <section id="contacto" class="section contacto">
-  <h2>Contacto</h2>
+  <h2 data-i18n="contacto_title">Contacto</h2>
 
   <div class="contacto-contenedor">
-<div class="qr-wrapper">
-  <a href="https://wa.me/19498774072" target="_blank">
-    <img src="qr-wpp.png" alt="Contáctanos por WhatsApp" class="lazy">
-  </a>
-</div>
-</a>
+    <div class="qr-wrapper">
+      <a href="https://wa.me/19498774072" target="_blank">
+        <img src="qr-wpp.png" alt="Contáctanos por WhatsApp" class="lazy">
+      </a>
     </div>
 
     <div class="redes-sociales">
-      <a href="https://instagram.com/ceciltrips" target="_blank">Instagram</a>
-      <a href="https://facebook.com/ceci.kovacs.5" target="_blank">Facebook</a>
-      <a href="https://ceciltrips.bokun.io" target="_blank">Bokun</a>
+      <a href="https://instagram.com/ceciltrips" target="_blank" data-i18n="social_instagram">Instagram</a>
+      <a href="https://facebook.com/ceci.kovacs.5" target="_blank" data-i18n="social_facebook">Facebook</a>
+      <a href="https://ceciltrips.bokun.io" target="_blank" data-i18n="social_reservas">Bokun</a>
     </div>
 
-<form class="formulario-contacto">
-  <label for="email">Dirección de mail preferida:</label>
-  <input type="email" id="email" name="email" required>
+    <form class="formulario-contacto">
+      <label for="email" data-i18n="form_email_label">Dirección de mail preferida:</label>
+      <input type="email" id="email" name="email" required data-i18n-ph="form_email_ph">
 
-  <label for="whatsapp">WhatsApp:</label>
-  <input type="tel" id="whatsapp" name="whatsapp" placeholder="+54 9 11 1234 5678" required>
+      <label for="whatsapp" data-i18n="form_whatsapp_label">WhatsApp:</label>
+      <input type="tel" id="whatsapp" name="whatsapp" required data-i18n-ph="form_whatsapp_ph">
 
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" required>
+      <label for="nombre" data-i18n="form_nombre_label">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required data-i18n-ph="form_nombre_ph">
 
-  <label for="personas">Cantidad de personas:</label>
-  <input type="number" id="personas" name="personas" min="1" required>
+      <label for="personas" data-i18n="form_personas_label">Cantidad de personas:</label>
+      <input type="number" id="personas" name="personas" min="1" required data-i18n-ph="form_personas_ph">
 
-  <label for="fecha">Fecha:</label>
-  <input type="date" id="fecha" name="fecha" required>
+      <label for="fecha" data-i18n="form_fecha_label">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required>
 
-  <label for="servicio">Servicio deseado:</label>
-  <select id="servicio" name="servicio" required>
-    <option value="">-- Seleccionar --</option>
-    <option value="tour">Tour</option>
-    <option value="surf">Surf Trip</option>
-    <option value="transfer">Transfer</option>
-    <option value="hospedaje">Hospedaje</option>
-    <option value="otro">Otro</option>
-  </select>
+      <label for="servicio" data-i18n="form_servicio_label">Servicio deseado:</label>
+      <select id="servicio" name="servicio" required>
+        <option value="" data-i18n="option_select">-- Seleccionar --</option>
+        <option value="tour" data-i18n="option_tour">Tour</option>
+        <option value="surf" data-i18n="option_surf">Surf Trip</option>
+        <option value="transfer" data-i18n="option_transfer">Transfer</option>
+        <option value="hospedaje" data-i18n="option_hospedaje">Hospedaje</option>
+        <option value="otro" data-i18n="option_otro">Otro</option>
+      </select>
 
-  <label for="vuelo">Si es desde o al aeropuerto, info del vuelo:</label>
-  <input type="text" id="vuelo" name="vuelo" placeholder="Ej: Nº vuelo, aerolínea, horario">
+      <label for="vuelo" data-i18n="form_vuelo_label">Si es desde o al aeropuerto, info del vuelo:</label>
+      <input type="text" id="vuelo" name="vuelo" data-i18n-ph="form_vuelo_ph">
 
-  <button type="submit">Enviar</button>
-</form>
+      <button type="submit" data-i18n="btn_send">Enviar</button>
+    </form>
   </div>
 </section>
+
 
 </main> <div id="destino-detalle" class="modal submenu-overlay">
   <div class="detalle-inner">
