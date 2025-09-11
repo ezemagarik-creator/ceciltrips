@@ -1,0 +1,70 @@
+{
+  "Búzios": {
+    "hospedaje": {
+      "es": "<ul><li>Pousada, suites y hostels</li></ul>",
+      "en": "<ul><li>Inn, suites, and hostels</li></ul>",
+      "pt": "<ul><li>Pousada, suítes e hostels</li></ul>"
+    },
+    "tours": {
+      "es": "<ul><li><strong>Convencionales:</strong></li><li>Paseo en barco por Búzios: R$70</li><li>Alquiler de buggy: R$320 por 24 horas</li><li>Paseo en buggy: R$100 por persona (mínimo 2)</li><li>Buceo: R$250 por persona</li><li>Alquiler de lancha privada: R$1200 por 3 horas</li><li><strong>Alternativos:</strong></li><li><strong>Paseo en barco:</strong> Dura 2h 30min, pasa por 12 playas y tiene paradas para snorkel en João Fernandes, Ilha Feia y Tartaruga. Incluye chalecos salvavidas, flotadores, colchoneta flotante, bar, música y fotografía opcional. Niños hasta 5 años no pagan. Capacidad: 130 personas. Tasa adicional: R$10 por persona.</li><li><strong>Bautismo de buceo:</strong> Se hace en Praia João Fernandes con un instructor certificado PADI. La inmersión dura 30min (1.5m a 6m de profundidad) y tiene un costo de R$230 por persona. Si son 2 personas, incluye 4 fotos y un video de regalo.</li></ul>",
+      "en": "<ul><li><strong>Conventional:</strong></li><li>Búzios Boat Trip: R$70</li><li>Buggy rental: R$320 per 24 hours</li><li>Buggy ride: R$100 per person (minimum 2)</li><li>Diving: R$250 per person</li><li>Private boat rental: R$1200 for 3 hours</li><li><strong>Alternative:</strong></li><li><strong>Boat trip:</strong> Lasts 2h 30min, passes through 12 beaches and has snorkel stops at João Fernandes, Ilha Feia, and Tartaruga. Includes life vests, floats, floating mat, bar, music, and optional photography. Children up to 5 years old are free. Capacity: 130 people. Additional fee: R$10 per person.</li><li><strong>Diving baptism:</strong> Takes place at Praia João Fernandes with a certified PADI instructor. The dive lasts 30min (1.5m to 6m deep) and costs R$230 per person. If there are 2 people, it includes 4 free photos and a video.</li></ul>",
+      "pt": "<ul><li><strong>Convencionais:</strong></li><li>Passeio de barco em Búzios: R$70</li><li>Aluguel de buggy: R$320 por 24 horas</li><li>Passeio de buggy: R$100 por pessoa (mínimo 2)</li><li>Mergulho: R$250 por pessoa</li><li>Aluguel de lancha privada: R$1200 por 3 horas</li><li><strong>Alternativos:</strong></li><li><strong>Passeio de barco:</strong> Dura 2h 30min, passa por 12 praias e tem paradas para snorkel em João Fernandes, Ilha Feia e Tartaruga. Inclui coletes salva-vidas, flutuadores, tapete flutuante, bar, música e fotografia opcional. Crianças até 5 anos não pagam. Capacidade: 130 pessoas. Taxa adicional: R$10 por pessoa.</li><li><strong>Batismo de mergulho:</strong> Ocorre na Praia João Fernandes com um instrutor certificado PADI. O mergulho dura 30min (1.5m a 6m de profundidade) e custa R$230 por pessoa. Se forem 2 pessoas, inclui 4 fotos e um vídeo de brinde.</li></ul>"
+    },
+    "transfers": {
+      "es": "<ul><li><strong>Privados:</strong> Rio - Búzios o viceversa. Hasta 3 personas: R$500. 4 personas: R$550. Personas adicionales: +R$50 (máximo 6 por auto).</li></ul>",
+      "en": "<ul><li><strong>Private:</strong> Rio - Búzios or vice versa. Up to 3 people: R$500. 4 people: R$550. Additional people: +R$50 (max 6 per car).</li></ul>",
+      "pt": "<ul><li><strong>Privados:</strong> Rio - Búzios ou vice-versa. Até 3 pessoas: R$500. 4 pessoas: R$550. Pessoas adicionais: +R$50 (máximo 6 por carro).</li></ul>"
+    }
+  },
+  "Río de Janeiro": {
+    "hospedaje": {
+      "es": "<ul><li>Hostel (cuartos privados y compartidos)</li><li>Airbnb</li></ul>",
+      "en": "<ul><li>Hostel (private and shared rooms)</li><li>Airbnb</li></ul>",
+      "pt": "<ul><li>Hostel (quartos privados e compartilhados)</li><li>Airbnb</li></ul>"
+    },
+    "tours": {
+      "es": "<ul><li><strong>Convencionales:</strong></li><li>City Tour Río de Janeiro: R$500 por persona (consultar precios para menores de 10 años). Incluye transporte ejecutivo, guía bilingüe y entrada al Cristo Redentor.</li><li><strong>Alternativos:</strong></li><li>Escalada en el Pan de Azúcar</li><li>Caminata guiada en el Parque da Tijuca (mínimo 2 personas)</li><li>Parapente</li></ul>",
+      "en": "<ul><li><strong>Conventional:</strong></li><li>Rio de Janeiro City Tour: R$500 per person (check prices for children under 10). Includes executive transport, a bilingual guide, and Christ the Redeemer entrance.</li><li><strong>Alternative:</strong></li><li>Climbing at Sugarloaf Mountain</li><li>Guided hike in Tijuca Park (minimum 2 people)</li><li>Paragliding</li></ul>",
+      "pt": "<ul><li><strong>Convencionais:</strong></li><li>City Tour Rio de Janeiro: R$500 por pessoa (consultar preços para menores de 10 anos). Inclui transporte executivo, guia bilíngue e entrada para o Cristo Redentor.</li><li><strong>Alternativos:</strong></li><li>Escalada no Pão de Açúcar</li><li>Caminhada guiada no Parque da Tijuca (mínimo 2 pessoas)</li><li>Parapente</li></ul>"
+    },
+    "transfers": {
+      "es": "<ul><li><strong>Compartido:</strong> Desde Río a Ilha Grande. Transporte terrestre y marítimo. Tarifas (Zona Sur, Centro y Aeropuertos): R$190. Barra da Tijuca y Recreio: R$220. Horarios de mañana y tarde.</li><li><strong>Compartido:</strong> Desde Río a Paraty o Angra dos Reis. R$260 por persona en temporada baja, R$300 en alta. Salidas diarias.</li></ul>",
+      "en": "<ul><li><strong>Shared:</strong> From Rio to Ilha Grande. Land and sea transport. Rates (South Zone, Downtown, and Airports): R$190. Barra da Tijuca and Recreio: R$220. Morning and afternoon schedules.</li><li><strong>Shared:</strong> From Rio to Paraty or Angra dos Reis. R$260 per person in low season, R$300 in high. Daily departures.</li></ul>",
+      "pt": "<ul><li><strong>Compartilhado:</strong> Do Rio para Ilha Grande. Transporte terrestre e marítimo. Tarifas (Zona Sul, Centro e Aeroportos): R$190. Barra da Tijuca e Recreio: R$220. Horários de manhã e tarde.</li><li><strong>Compartilhado:</strong> Do Rio para Paraty ou Angra dos Reis. R$260 por pessoa na baixa temporada, R$300 na alta. Saídas diárias.</li></ul>"
+    }
+  },
+  "Ilha Grande": {
+    "hospedaje": {
+      "es": "<ul><li>Pousada, suites y hostels</li></ul>",
+      "en": "<ul><li>Inn, suites, and hostels</li></ul>",
+      "pt": "<ul><li>Pousada, suítes e hostels</li></ul>"
+    },
+    "tours": {
+      "es": "<ul><li><strong>Convencionales:</strong></li><li>Paseos en lancha: Vuelta a la Isla, Islas Paradisiacas, Gruta do Acaiá, Media Vuelta a la Isla.</li><li>Barco a Lopes Mendes: R$70</li><li><strong>Alternativos:</strong></li><li>Subida al Pico do Papagaio con guía</li><li>Paseo en canoa hawaiana</li><li>Paseo de snorkel con almuerzo y café</li><li>Buceo</li></ul>",
+      "en": "<ul><li><strong>Conventional:</strong></li><li>Boat tours: Full Island Loop, Paradisiacal Islands, Gruta do Acaiá, Half Island Loop.</li><li>Boat to Lopes Mendes: R$70</li><li><strong>Alternative:</strong></li><li>Climb Pico do Papagaio with a guide</li><li>Hawaiian canoe trip</li><li>Snorkel trip with lunch and coffee</li><li>Diving</li></ul>",
+      "pt": "<ul><li><strong>Convencionais:</strong></li><li>Passeios de lancha: Volta à Ilha, Ilhas Paradisíacas, Gruta do Acaiá, Meia Volta à Ilha.</li><li>Barco para Lopes Mendes: R$70</li><li><strong>Alternativos:</strong></li><li>Subida ao Pico do Papagaio com guia</li><li>Passeio de canoa havaiana</li><li>Passeio de snorkel com almoço e café</li><li>Mergulho</li></ul>"
+    },
+    "transfers": {
+      "es": "<ul><li><strong>Privados:</strong> Rio - Ilha Grande o viceversa. R$500 hasta 3 personas (barco separado).</li><li><strong>Compartidos:</strong> Rio-Ilha Grande. R$500 hasta 4 personas, más barco (aprox. R$75 en temporada baja y R$100 en alta).</li></ul>",
+      "en": "<ul><li><strong>Private:</strong> Rio - Ilha Grande or vice versa. R$500 up to 3 people (separate boat).</li><li><strong>Shared:</strong> Rio - Ilha Grande. R$500 up to 4 people, plus boat (approx. R$75 in low season and R$100 in high).</li></ul>",
+      "pt": "<ul><li><strong>Privados:</strong> Rio - Ilha Grande ou vice-versa. R$500 até 3 pessoas (barco separado).</li><li><strong>Compartilhados:</strong> Rio-Ilha Grande. R$500 até 4 pessoas, mais barco (aprox. R$75 na baixa temporada e R$100 na alta).</li></ul>"
+    }
+  },
+  "Arraial do Cabo": {
+    "hospedaje": {
+      "es": "<ul><li>Pousada, suites y hostels (precios varían según la fecha)</li></ul>",
+      "en": "<ul><li>Inn, suites, and hostels (prices vary by date)</li></ul>",
+      "pt": "<ul><li>Pousada, suítes e hostels (os preços variam de acordo com a data)</li></ul>"
+    },
+    "tours": {
+      "es": "<ul><li><strong>Paseo en barco por Arraial do Cabo:</strong> Salida desde Búzios (traslado con guía). Paseo en barco de 4h, incluye 1h de almuerzo buffet en Cabo Frío. No incluye tasas de embarque (R$10) ni de jardineira (R$10).</li><li><strong>Tour a Cabo Frío:</strong> Salida desde Búzios, visita varias playas y lugares turísticos. Incluye compras y almuerzo buffet. Tour privado disponible (mínimo 2 personas) a R$250 por persona.</li></ul>",
+      "en": "<ul><li><strong>Arraial do Cabo Boat Trip:</strong> Departure from Búzios (transfer with guide). 4h boat trip, includes 1h buffet lunch in Cabo Frio. Does not include boarding fees (R$10) or 'jardineira' fees (R$10).</li><li><strong>Cabo Frio Tour:</strong> Departure from Búzios, visits several beaches and tourist spots. Includes shopping and a buffet lunch. Private tour available (minimum 2 people) for R$250 per person.</li></ul>",
+      "pt": "<ul><li><strong>Passeio de barco em Arraial do Cabo:</strong> Saída de Búzios (transporte com guia). Passeio de barco de 4h, inclui 1h de almoço buffet em Cabo Frio. Não inclui taxas de embarque (R$10) nem de jardineira (R$10).</li><li><strong>Tour em Cabo Frio:</strong> Saída de Búzios, visita várias praias e pontos turísticos. Inclui compras e um almoço buffet. Tour privado disponível (mínimo 2 pessoas) por R$250 por pessoa.</li></ul>"
+    },
+    "transfers": {
+      "es": "<ul><li>Privados y compartidos desde Búzios con guía.</li></ul>",
+      "en": "<ul><li>Private and shared from Búzios with a guide.</li></ul>",
+      "pt": "<ul><li>Privado e compartilhado a partir de Búzios com guia.</li></ul>"
+    }
+  }
+}
