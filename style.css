@@ -1,0 +1,860 @@
+/* =====================
+   Reset & Base
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  scroll-padding-top: 70px;
+}
+
+/* ELIMINADO: Se quita esta clase del body para que no afecte a todo el DOM */
+/* body.blur-background {
+  filter: blur(8px);
+} */
+
+.section h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: black;
+  margin: 0 0 50px 0;
+}
+
+/* =====================
+   Header
+===================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 16px;
+  background: #0091B9;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 800; /* Z-index para que el header esté por encima de las secciones */
+}
+
+header .logo {
+  padding-top: 40px;
+}
+
+header .logo img {
+  height: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  padding: 5px 0;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .6s cubic-bezier(.77,0,.175,1);
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  transform: scaleX(1);
+}
+
+/* =====================
+   Submenú Overlay / Modal Destinos
+===================== */
+.submenu-overlay {
+  display: none;
+  position: fixed; /* Corregido: 'position: none' no es válido, se usa 'fixed' */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.25);
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  padding: 20px;
+}
+
+.submenu-overlay.active {
+  display: block;
+}
+
+/* =======================
+   Modal Detalle Destino
+======================= */
+#destino-detalle {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex; /* Se mantiene como flex para centrar el contenido */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden; /* Oculta el modal sin quitarlo del flujo */
+  transition: opacity 0.4s ease, visibility 0.4s ease; /* Transición para la opacidad y visibilidad */
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+#destino-detalle.visible {
+  opacity: 1;
+  visibility: visible; /* Hace el modal visible */
+}
+
+#destino-detalle .modal-content {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  padding: 2rem;
+  position: relative;
+}
+
+#destino-detalle .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.tab-buttons button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.tab-buttons button.active {
+  background: #333;
+  color: #fff;
+}
+
+.tab-content > div {
+  display: none;
+  margin-top: 1rem;
+}
+
+.tab-content > div.active {
+  display: block;
+}
+
+.detalle-inner {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  will-change: height;
+  contain: layout;
+}
+
+.detalle-inner .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  margin-bottom: 15px;
+}
+
+.detalle-inner .tabs {
+  display: flex;
+  gap: 12px;
+  padding-left: 5px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  font-weight: 700;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: color .25s ease, border-color .25s ease, transform .2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+  color: #008080;
+  border-bottom: 2px solid #008080;
+}
+
+.tab-content {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .28s ease;
+  margin-top: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.tab-content.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.detalle-inner .tab-content p,
+.detalle-inner .tab-content ul {
+  margin: 0 0 12px 0;
+}
+
+#volver-btn {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  background: linear-gradient(135deg,#0091B9,#00DCFF);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 0;
+}
+
+#volver-btn:hover {
+  background: linear-gradient(135deg,#007499,#00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.detalle-inner .tab-btn {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(135deg,#0091B9,#00DCFF);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.detalle-inner .tab-btn:hover {
+  background: linear-gradient(135deg,#007499,#00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.detalle-inner .tab-btn.active {
+  background: linear-gradient(135deg,#00DCFF,#0091B9);
+  color: #fff;
+}
+
+/* =====================
+   Main Layout
+===================== */
+main.main-background {
+  flex: 1;
+  position: relative;
+  transition: filter .3s ease;
+  z-index: 1; /* Corregido: z-index bajo para que el modal se vea encima */
+}
+
+main.main-background.blur-background {
+  filter: blur(8px);
+}
+
+.main-background,
+header {
+  transition: filter 0.4s ease;
+  z-index: 999;
+}
+
+/* =====================
+   Secciones SPA
+===================== */
+.section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  transform: translateX(100%);
+  z-index: 1;
+  background: #fff;
+  padding-top: 100px;
+  visibility: hidden;
+}
+
+.section.active {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 2;
+  visibility: visible;
+}
+
+.section.next {
+  transform: translateX(100%);
+  z-index: 1;
+  visibility: visible;
+}
+
+.section.prev {
+  transform: translateX(-100%);
+  z-index: 1;
+  visibility: visible;
+}
+
+.section.exit-right {
+  transform: translateX(100%);
+  z-index: 0;
+}
+
+.section.exit-left {
+  transform: translateX(-100%);
+  z-index: 0;
+}
+
+/* =====================
+   Footer
+===================== */
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+/* =====================
+   Home
+===================== */
+.section.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(to bottom,#0091B9 0,#0091B9 70px,#eaf7fb 250px,#ffffff 100%);
+}
+
+.section.home h1 {
+  color: #eaf7b;
+  font-size: 2.2rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+}
+
+.home-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.banner img {
+  width: 32%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* =====================
+   Tips de Viaje
+===================== */
+.tips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(0,145,185,0.95), rgba(0,220,255,0.85));
+  padding: 15px 10px;
+  border-radius: 12px;
+  color: #fff;
+  max-width: 900px;
+  margin: 15px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.tips h2 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.tips-columns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tip-col {
+  flex: 1;
+  min-width: 150px;
+  text-align: center;
+}
+
+.tip-col h3 {
+  font-size: 1.15rem;
+  margin-bottom: 6px;
+}
+
+.tip-col p {
+  font-size: 0.9rem;
+  line-height: 1.3;
+  margin: 4px 0;
+}
+
+/* =====================
+   Destinos y Cards
+===================== */
+.section.destinos {
+  padding: 100px 20px 60px;
+  background: linear-gradient(to bottom, #eaf7fb, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.section.destinos h2 {
+  margin: 0 0 50px 0;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  width: 90%;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.tour-card {
+  width: 100%;
+  height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tour-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 10px 25px rgba(0,0,0,0.18);
+}
+
+.tour-card .image {
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.tour-card img.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tour-card .text-wrapper {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px 0;
+  text-align: center;
+  background: rgba(0,145,185,0.35);
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.tour-card .text-wrapper h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.tour-card .text-wrapper button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tour-card .text-wrapper button:hover {
+  background: linear-gradient(135deg, #007499, #00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* =====================
+   Reseñas
+===================== */
+.section.resenas {
+  overflow-y: visible;
+  padding-top: 140px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f7f7f7;
+}
+
+.section.resenas h2 {
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.resenas-carousel-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  display: flex;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+  padding: 20px 0;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.resenas-carousel {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.resena {
+  position: relative;
+  min-width: 250px;
+  max-width: 300px;
+  height: auto;
+  padding: 25px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+.resena::before {
+  content: '“';
+  font-size: 2rem;
+  color: #0091B9;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.resena::after {
+  content: '”';
+  font-size: 2rem;
+  color: #0091B9;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.cta-experiencia {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.cta-experiencia .btn-mail {
+  display: inline-block;
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.cta-experiencia .btn-mail:hover {
+  background: linear-gradient(135deg, #007499, #00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* =====================
+   Surf Trips
+===================== */
+.section.surftrips h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.surftrips-gallery {
+  column-count: 3;
+  column-gap: 15px;
+  padding: 0 15px;
+}
+
+.surf-card {
+  display: inline-block;
+  margin-bottom: 15px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.surf-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.surf-card img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+  .surftrips-gallery { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+  .surftrips-gallery { column-count: 1; }
+}
+
+.surf-info {
+  text-align: center;
+  margin: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* =====================
+   Sección Contacto (ajustada)
+===================== */
+#contacto {
+  padding: 100px 20px;
+  background: linear-gradient(to bottom, #ffffff, #f2f9fb);
+  text-align: center;
+}
+
+.contacto-contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  row-gap: 40px; /* espacio vertical entre QR, redes y formulario */
+  padding: 20px; /* opcional para que no quede pegado al borde */
+}
+
+/* QR */
+.qr-wrapper img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.qr-wrapper img:hover {
+  transform: scale(1.05);
+}
+
+.wa-qr-link img {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.wa-qr-link img:hover {
+  transform: scale(1.05);
+}
+/* Redes Sociales */
+.redes-sociales {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px; /* agrega espacio entre botones y formulario */
+
+}
+
+.redes-sociales a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.redes-sociales a:hover {
+  background: linear-gradient(135deg, #007499, #00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* =====================
+   Formulario Contacto Final
+===================== */
+.formulario-contacto {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Labels */
+.formulario-contacto label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+/* Todos los inputs y selects iguales */
+.formulario-contacto input,
+.formulario-contacto select,
+.formulario-contacto textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  height: 44px;          /* fuerza altura uniforme */
+  line-height: 1.2;      /* centra verticalmente el texto */
+}
+
+/* Focus */
+.formulario-contacto input:focus,
+.formulario-contacto select:focus,
+.formulario-contacto textarea:focus {
+  outline: none;
+  border-color: #0091B9;
+  box-shadow: 0 0 4px rgba(0,145,185,0.4);
+}
+
+/* Placeholder simulados */
+.formulario-contacto input::placeholder,
+.formulario-contacto textarea::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+/* Inputs tipo date y number */
+.formulario-contacto input[type="date"],
+.formulario-contacto input[type="number"],
+.formulario-contacto input[type="tel"],
+.formulario-contacto input[type="email"],
+.formulario-contacto input[type="text"] {
+  appearance: none;
+  height: 44px;          /* asegura altura igual que los demás */
+  line-height: 1.2;
+  padding: 12px 14px;
+}
+
+/* Select */
+.formulario-contacto select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* Botón */
+.formulario-contacto button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.formulario-contacto button:hover {
+  background: linear-gradient(135deg, #007499, #00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
