@@ -15,6 +15,12 @@ html, body {
   scroll-padding-top: 70px;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ELIMINADO: Se quita esta clase del body para que no afecte a todo el DOM */
 /* body.blur-background {
   filter: blur(8px);
@@ -42,16 +48,17 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  min-height: 70px;   /* antes height fijo */
+  height: auto;       /* deja que crezca si necesita */
   z-index: 800; /* Z-index para que el header esté por encima de las secciones */
 }
 
 header .logo {
-  padding-top: 40px;
+  padding-top: 0; 
 }
 
 header .logo img {
-  height: 140px;
+  height: 68px; 
   width: auto;
   object-fit: contain;
 }
@@ -369,9 +376,11 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
+  justify-content: center;
+  min-height: calc(100vh - 70px); /* resto el header */
   background: linear-gradient(to bottom,#0091B9 0,#0091B9 70px,#eaf7fb 250px,#ffffff 100%);
+  background-size: cover;
+  background-position: center;
 }
 
 .section.home h1 {
@@ -857,4 +866,10 @@ footer {
   background: linear-gradient(135deg, #007499, #00B0D0);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+@media (max-width: 600px) {
+  header .logo img {
+    height: 55px;
+  }
 }
