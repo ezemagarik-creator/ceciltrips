@@ -210,7 +210,7 @@ nav ul li a.active::after {
   flex-wrap: nowrap;
   gap: 12px;
   padding-left: 5px;
-  overflow-x: auto;        /* permite scroll horizontal si no entran */
+  overflow-x: visible;        /* permite scroll horizontal si no entran */
   -webkit-overflow-scrolling: touch; /* smooth scroll en iOS */
 }
 
@@ -281,7 +281,8 @@ nav ul li a.active::after {
   font-weight: 700;
   background: linear-gradient(135deg,#0091B9,#00DCFF);
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  flex: 0 0 auto;          /* mantiene tamaño de cada botón */
+  flex: 1 1 auto; 
+   text-align: center;
 }
 
 .detalle-inner .tab-btn:hover {
@@ -885,5 +886,10 @@ footer {
 @media (max-width: 600px) {
   header .logo img {
     height: 55px;
+  }
+}
+@media (max-width: 768px) {
+  .detalle-inner .tabs {
+    overflow-x: auto;
   }
 }
