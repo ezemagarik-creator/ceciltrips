@@ -381,23 +381,32 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-center;
   min-height: calc(100vh - 70px); /* resto el header */
-  background: linear-gradient(to bottom,#0091B9 0,#0091B9 70px,#eaf7fb 250px,#ffffff 100%);
+  background: linear-gradient(
+    to bottom,
+    #0091B9 100px,  /* empieza más abajo que el header */
+    #0091B9 180px,  /* define la franja azul superior */
+    #eaf7fb 280px,
+    #ffffff 100%
+  );
+
   background-size: cover;
   background-position: center;
+  padding: 140px 20px 40px;
 }
 
 .section.home h1 {
-  color: #eaf7b;
+  color: #eaf7fb;
   font-size: 2.2rem;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+  margin: 0 0 30px 0;
 }
 
 .home-wrapper {
   max-width: 1200px;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -407,7 +416,7 @@ footer {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .banner img {
