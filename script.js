@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Variables principales
   const mainBackground = $('.main-background');
   const header = $('header');
-  const navLinks = $$('a[data-section], header nav a[href^="#"]');
+  // Se unifican todos los enlaces de la SPA en un solo selector
+  const allSpaLinks = $$('a[data-section], header nav a[href^="#"], .btn-mail[href="#contacto"]');
   const sections = $$('.section');
   const sectionById = Object.fromEntries(sections.map(s => [s.id, s]));
   const sectionOrder = ['home', 'destinos', 'resenas', 'surf-trips', 'contacto'];
@@ -21,6 +22,42 @@ document.addEventListener('DOMContentLoaded', () => {
   let destinosData = {};
   let translations = {};
   let currentLang = localStorage.getItem('lang') || 'es';
+
+  // Agrega el subtítulo del header y los textos
+  const headerSubtitle = $('#header-subtitle');
+  const subtitleTexts = {
+    'destinos': 'Nuestros Destinos',
+    'resenas': 'Reseñas de Viajeros',
+    'surf-trips': 'Explora un Surf Trip',
+    'contacto': 'Contactanos',
+  };
+
+  // ============================
+  // Funciones auxiliares
+  function animateHeight(element, targetHeight, duration = 0.3) {
+    const startHeight = element.offsetHeight;
+    
+    if (startHeight === 0) {
+      element.style.height = targetHeight + 'px';
+    } else {
+      element.style.transition = 'none';
+      element.style.height = startHeight + 'px';
+      element.offsetHeight; // Forzar reflow
+      element.style.transition = `height ${duration}s cubic-bezier(0.25,0.8,0.25,1)`;
+      element.style.height = targetHeight + 'px';
+    }
+  }
+
+  // Función para actualizar el subtítulo del header
+  function updateHeaderSubtitle(sectionId) {
+    if (sectionId === 'home') {
+      header.classList.remove('has-subtitle');
+      if (headerSubtitle) headerSubtitle.innerText = '';
+    } else {
+      header.classList.add('has-subtitle');
+      if (headerSubtitle) headerSubtitle.innerText = subtitleTexts[sectionId] || '';
+    }
+  }
 
   // ============================
   // SPA: switchSection
@@ -36,10 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
       else sectionById[id].classList.add(i < sectionOrder.indexOf(nextId) ? 'prev' : 'next');
     });
 
-    navLinks.forEach(link => {
+    allSpaLinks.forEach(link => {
       const linkTarget = link.dataset.section || link.getAttribute('href').replace('#', '');
       link.classList.toggle('active', linkTarget === nextId);
     });
+
+    updateHeaderSubtitle(nextId);
 
     currentId = nextId;
     isAnimating = false;
@@ -49,8 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar SPA
   sections.forEach(s => s.classList.remove('active', 'prev', 'next'));
   if (sectionById[currentId]) sectionById[currentId].classList.add('active');
+  updateHeaderSubtitle(currentId);
 
-  navLinks.forEach(link => {
+  // Unifica el manejo de los eventos de click para todos los enlaces de la SPA
+  allSpaLinks.forEach(link => {
     const linkTarget = link.dataset.section || link.getAttribute('href').replace('#', '');
     link.classList.toggle('active', linkTarget === currentId);
     link.addEventListener('click', e => {
@@ -155,8 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   // ============================
-  // Botón Contanos tu experiencia
-  $('.btn-mail')?.addEventListener('click', e => { e.preventDefault(); window.location.href = 'mailto:info@cecilia-kovacs.com'; });
+  // Botón Contanos tu experiencia (mailto)
+  // Se mantiene separado porque no es navegación SPA
+  $('.btn-mail[href^="mailto:"]')?.addEventListener('click', e => { 
+    e.preventDefault(); 
+    window.location.href = 'mailto:info@cecilia-kovacs.com'; 
+  });
 
   // ============================
   // EmailJS
@@ -171,115 +216,168 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-// ============================
-// Fetch y lógica del modal
-fetch('destinos.json')
-  .then(res => {
-    if (!res.ok) throw new Error('No se pudo cargar destinos.json');
-    return res.json();
-  })
-  .then(data => {
-    destinosData = data; 
-    
-    const modal = $('#destino-detalle');
-    const detalleTitulo = $('#detalle-titulo');
-    const tabs = $$('.tab-btn');
-    const tabContents = $$('.tab-content');
-    const volverBtn = $('#volver-btn');
+  // ============================
+  // Fetch y lógica del modal + Destinos desplegables
+  fetch('destinos.json')
+    .then(res => {
+      if (!res.ok) throw new Error('No se pudo cargar destinos.json');
+      return res.json();
+    })
+    .then(data => {
+      destinosData = data;
 
-    // Función para generar el HTML correcto
-    function generarHTML(contentData) {
-      if (!contentData || !contentData[currentLang]) {
-        return '<p>Información no disponible para este idioma.</p>';
+      const modal = $('#destino-detalle');
+      const detalleInner = $('.detalle-inner');
+      const detalleTitulo = $('#detalle-titulo');
+      const tabButtons = $$('.tab-btn');
+      const tabContents = $$('.tab-content');
+      const volverBtn = $('#volver-btn');
+
+      function generarHTML(contentData) {
+        if (!contentData || !contentData[currentLang]) {
+          return '<p>Información no disponible para este idioma.</p>';
+        }
+        return contentData[currentLang];
       }
-      return contentData[currentLang];
-    }
-
-    $$('.tour-card button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const card = btn.closest('.tour-card');
-        const destinoName = card.dataset.destino;
-        const destinoInfo = destinosData[destinoName];
-
-        if (!destinoInfo) return alert('Sin información 😢');
-
-        detalleTitulo.innerText = destinoName;
-
+      
+      // Función que actualiza el contenido y ajusta la altura del modal
+      function updateModalContentAndHeight(destinoInfo) {
         tabContents.forEach(tc => { tc.innerHTML = ''; tc.classList.remove('active'); });
-        tabs.forEach(tab => tab.classList.remove('active'));
+        tabButtons.forEach(tab => tab.classList.remove('active'));
 
         let firstTabActivated = false;
-        const tabsContent = [
-          { id: 'hospedaje', data: destinoInfo.hospedaje },
-          { id: 'tours', data: destinoInfo.tours },
-          { id: 'transfers', data: destinoInfo.transfers }
-        ];
+        const tabsData = [{ id: 'hospedaje', data: destinoInfo.hospedaje }, { id: 'tours', data: destinoInfo.tours }, { id: 'transfers', data: destinoInfo.transfers }];
 
-        tabsContent.forEach((tab, index) => {
+        tabsData.forEach((tab, index) => {
           const htmlContent = generarHTML(tab.data);
           document.getElementById(tab.id).innerHTML = htmlContent;
 
-          if (htmlContent.indexOf('Información no disponible') === -1) {
-            if (!firstTabActivated) { 
-              tabs[index].classList.add('active'); 
-              document.getElementById(tab.id).classList.add('active');
-              firstTabActivated = true;
-            }
+          if (htmlContent.indexOf('Información no disponible') === -1 && !firstTabActivated) {
+            tabButtons[index].classList.add('active');
+            document.getElementById(tab.id).classList.add('active');
+            firstTabActivated = true;
           }
         });
 
         if (!firstTabActivated) {
           document.getElementById('hospedaje').innerHTML = '<p>Información no disponible.</p>';
-          tabs[0].classList.add('active');
+          tabButtons[0].classList.add('active');
           document.getElementById('hospedaje').classList.add('active');
         }
 
-        // Aquí es donde aplicas el efecto de desenfoque y muestras el modal
-        mainBackground.classList.add('blur-background');
-        header.classList.add('blur-background');
-        modal.classList.add('visible');
-      });
-    });
-
-    volverBtn.addEventListener('click', () => {
-      // Al cerrar el modal, se quita el efecto y la visibilidad
-      modal.classList.remove('visible');
-      mainBackground.classList.remove('blur-background');
-      header.classList.remove('blur-background');
-    });
-
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tabContents.forEach(tc => tc.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
-      });
-    });
-    
-    // La función para el cambio de idioma también debe actualizar el modal si está abierto
-    $$('.flag-btn').forEach(btn => btn.addEventListener('click', () => {
-      currentLang = btn.dataset.lang;
-      localStorage.setItem('lang', currentLang);
-      applyTranslations();
-      
-      // Si el modal está abierto, actualiza su contenido
-      if(modal.classList.contains('visible')) {
-        const destinoName = detalleTitulo.innerText;
-        const destinoInfo = destinosData[destinoName];
-        if(destinoInfo) {
-          tabsContent.forEach(tab => {
-            const htmlContent = generarHTML(tab.data);
-            document.getElementById(tab.id).innerHTML = htmlContent;
-          });
+        const activeContent = document.querySelector(".tab-content.active");
+        if (activeContent) {
+          const headerHeight = detalleInner.querySelector(".modal-header").offsetHeight;
+          const paddingBottom = 40; // Mayor padding para un mejor espacio
+          const newHeight = activeContent.scrollHeight + headerHeight + paddingBottom;
+          
+          detalleInner.style.height = `${newHeight}px`;
         }
       }
-    }));
-  })
-  .catch(err => {
-    console.error('Error cargando destinos:', err);
-    alert('No se pudo cargar la información de los destinos.');
+
+      $$('.tour-card button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.tour-card');
+          const destinoName = card.dataset.destino;
+          const destinoInfo = destinosData[destinoName];
+
+          if (!destinoInfo) return alert('Sin información 😢');
+
+          detalleTitulo.innerText = destinoName;
+          updateModalContentAndHeight(destinoInfo);
+
+          mainBackground.classList.add('blur-background');
+          header.classList.add('blur-background');
+          modal.classList.add('visible');
+        });
+      });
+
+      volverBtn.addEventListener('click', () => {
+        modal.classList.remove('visible');
+        mainBackground.classList.remove('blur-background');
+        header.classList.remove('blur-background');
+      });
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.tab;
+          const newContent = document.getElementById(targetId);
+
+          if (newContent.classList.contains("active")) return;
+
+          tabButtons.forEach(b => b.classList.remove("active"));
+          tabContents.forEach(c => c.classList.remove("active"));
+          btn.classList.add("active");
+          newContent.classList.add("active");
+
+          const headerHeight = detalleInner.querySelector(".modal-header").offsetHeight;
+          const paddingBottom = 40; // Mayor padding para un mejor espacio
+          const newHeight = newContent.scrollHeight + headerHeight + paddingBottom;
+          animateHeight(detalleInner, newHeight);
+        });
+      });
+
+      // El ResizeObserver ahora se encargará de cualquier cambio posterior
+      const resizeObserver = new ResizeObserver(() => {
+        const activeContent = document.querySelector(".tab-content.active");
+        if (!activeContent) return;
+        const headerHeight = detalleInner.querySelector(".modal-header").offsetHeight;
+        const paddingBottom = 40; // Mayor padding para un mejor espacio
+        const newHeight = activeContent.scrollHeight + headerHeight + paddingBottom;
+        animateHeight(detalleInner, newHeight);
+      });
+      resizeObserver.observe(detalleInner);
+
+      $$('.flag-btn').forEach(btn => btn.addEventListener('click', () => {
+        currentLang = btn.dataset.lang;
+        localStorage.setItem('lang', currentLang);
+        applyTranslations();
+        if (modal.classList.contains('visible')) {
+          const destinoName = detalleTitulo.innerText;
+          const destinoInfo = destinosData[destinoName];
+          if (destinoInfo) {
+            updateModalContentAndHeight(destinoInfo);
+          }
+        }
+      }));
+    })
+    .catch(err => {
+      console.error('Error cargando destinos:', err);
+      alert('No se pudo cargar la información de los destinos.');
+    });
+
+  // ============================
+  // Destinos desplegables (Accordion)
+  const destinos = document.querySelectorAll('.destino');
+  destinos.forEach(destino => {
+    const contenido = destino.querySelector('.contenido');
+
+    // Inicializar cerrados
+    contenido.style.height = '0px';
+    contenido.style.overflow = 'hidden';
+    contenido.style.opacity = '0';
+    contenido.style.transition = 'height 0.25s ease, opacity 0.25s ease';
+
+    destino.addEventListener('click', () => {
+      const isOpen = contenido.offsetHeight > 0;
+
+      destinos.forEach(otherDestino => {
+        const otherContenido = otherDestino.querySelector('.contenido');
+        if (otherContenido !== contenido && otherContenido.offsetHeight > 0) {
+          otherContenido.style.height = '0px';
+          otherContenido.style.opacity = '0';
+        }
+      });
+
+      if (!isOpen) {
+        const paddingBottom = 20; // Espacio extra para que el texto respire
+        const fullHeight = contenido.scrollHeight + paddingBottom;
+        contenido.style.height = fullHeight + 'px';
+        contenido.style.opacity = '1';
+      } else {
+        contenido.style.height = '0px';
+        contenido.style.opacity = '0';
+      }
+    });
   });
-
-
 });
