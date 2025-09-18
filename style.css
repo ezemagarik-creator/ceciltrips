@@ -21,11 +21,6 @@ img {
   display: block;
 }
 
-/* ELIMINADO: Se quita esta clase del body para que no afecte a todo el DOM */
-/* body.blur-background {
-  filter: blur(8px);
-} */
-
 .section h2 {
   text-align: center;
   font-size: 2rem;
@@ -48,9 +43,11 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  min-height: 70px;   /* antes height fijo */
-  height: auto;       /* deja que crezca si necesita */
-  z-index: 800; /* Z-index para que el header esté por encima de las secciones */
+  min-height: 70px;   
+  height: auto;       
+  z-index: 800; 
+  /* Animación cubic-bezier para el blur */
+  transition: filter 0.4s cubic-bezier(.4, 0, .2, 1);
 }
 
 header .logo {
@@ -87,7 +84,8 @@ nav ul li a::after {
   background: #fff;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform .6s cubic-bezier(.77,0,.175,1);
+  /* Animación cubic-bezier para el menú */
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
 }
 
 nav ul li a:hover::after,
@@ -100,7 +98,7 @@ nav ul li a.active::after {
 ===================== */
 .submenu-overlay {
   display: none;
-  position: fixed; /* Corregido: 'position: none' no es válido, se usa 'fixed' */
+  position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   backdrop-filter: blur(8px);
@@ -115,6 +113,7 @@ nav ul li a.active::after {
   display: block;
 }
 
+
 /* =======================
    Modal Detalle Destino
 ======================= */
@@ -122,20 +121,25 @@ nav ul li a.active::after {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
-  display: flex; /* Se mantiene como flex para centrar el contenido */
+  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
   opacity: 0;
-  visibility: hidden; /* Oculta el modal sin quitarlo del flujo */
-  transition: opacity 0.4s ease, visibility 0.4s ease; /* Transición para la opacidad y visibilidad */
+  visibility: hidden;
+  transform: scale(0.95);
+  /* Animación cubic-bezier para el modal */
+  transition: opacity 0.4s cubic-bezier(.4, 0, .2, 1), transform 0.4s cubic-bezier(.4, 0, .2, 1);
   overflow-y: auto;
   padding: 2rem;
+  pointer-events: none;
 }
 
 #destino-detalle.visible {
   opacity: 1;
-  visibility: visible; /* Hace el modal visible */
+  transform: scale(1);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 #destino-detalle .modal-content {
@@ -147,6 +151,7 @@ nav ul li a.active::after {
   overflow-y: auto;
   box-shadow: 0 8px 25px rgba(0,0,0,0.3);
   padding: 2rem;
+  padding-bottom: 7rem;
   position: relative;
 }
 
@@ -165,7 +170,8 @@ nav ul li a.active::after {
   border: none;
   background: #eee;
   border-radius: 5px;
-  transition: background 0.3s;
+  /* Animación cubic-bezier para los botones de tabs */
+  transition: background 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .tab-buttons button.active {
@@ -185,15 +191,17 @@ nav ul li a.active::after {
 .detalle-inner {
   background: #fff;
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 20px 30px;
   width: 90%;
   max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;  /* antes estaba 'hidden' */
+  height: 0;
   display: flex;
   flex-direction: column;
   will-change: height;
   contain: layout;
+  /* Animación cubic-bezier para la altura del modal */
+  transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .detalle-inner .modal-header {
@@ -206,12 +214,15 @@ nav ul li a.active::after {
 }
 
 .detalle-inner .tabs {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  gap: 12px;
-  padding-left: 5px;
-  overflow-x: visible;        /* permite scroll horizontal si no entran */
-  -webkit-overflow-scrolling: touch; /* smooth scroll en iOS */
+  gap: 8px;
+  padding: 0 5px;
+  overflow-x: auto;        
+  -webkit-overflow-scrolling: touch; 
+  overflow: visible;
+  justify-content: center;
 }
 
 .tab-btn {
@@ -220,12 +231,13 @@ nav ul li a.active::after {
   font-weight: 700;
   padding: 10px 15px;
   cursor: pointer;
-  transition: color .25s ease, border-color .25s ease, transform .2s ease;
+  /* Animación cubic-bezier para los botones del modal */
+  transition: color .25s cubic-bezier(.4, 0, .2, 1), border-color .25s cubic-bezier(.4, 0, .2, 1), transform .2s cubic-bezier(.4, 0, .2, 1);
   border-bottom: 2px solid transparent;
 }
 
 .tab-btn.active {
-  color: #008080;
+  color: #fff;
   border-bottom: 2px solid #008080;
 }
 
@@ -233,11 +245,27 @@ nav ul li a.active::after {
   display: none;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .28s ease;
+  /* Animación cubic-bezier para el contenido de los tabs */
+  transition: opacity .28s cubic-bezier(.4, 0, .2, 1);
   margin-top: 15px;
   padding: 10px;
   box-sizing: border-box;
   overflow-wrap: break-word;
+
+}
+.destino .contenido {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  /* Animación cubic-bezier para el acordeón */
+  transition: max-height 0.25s cubic-bezier(.4, 0, .2, 1), opacity 0.25s cubic-bezier(.4, 0, .2, 1), padding 0.25s cubic-bezier(.4, 0, .2, 1);
+  padding: 0 20px;
+}
+
+.destino .contenido.open {
+  max-height: 1000px;
+  opacity: 1;
+  padding: 20px;
 }
 
 .tab-content.active {
@@ -251,49 +279,44 @@ nav ul li a.active::after {
   margin: 0 0 12px 0;
 }
 
-#volver-btn {
+/* =====================
+   Botones unificados - todos los botones del sitio
+===================== */
+.btn-unificado {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;        
+  border-radius: 25px;        
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  /* Animación cubic-bezier para el botón unificado */
+  transition: background 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.2s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s cubic-bezier(.4, 0, .2, 1);
+  cursor: pointer;
+  border: none;
+}
+
+/* Hover */
+.btn-unificado:hover {
+  background: linear-gradient(135deg, #007499, #00B0D0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Botones de formulario, links o botones normales */
+button.btn-unificado,
+a.btn-unificado {
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+/* Ajuste para botones en tabs y modales (si tienen padding diferente) */
+.tab-btn.btn-unificado {
   padding: 8px 18px;
   font-size: 0.9rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: bold;
-  background: linear-gradient(135deg,#0091B9,#00DCFF);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  margin-top: 0;
-  flex-shrink: 0;
-}
-
-#volver-btn:hover {
-  background: linear-gradient(135deg,#007499,#00B0D0);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
-
-.detalle-inner .tab-btn {
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  color: #fff;
-  font-weight: 700;
-  background: linear-gradient(135deg,#0091B9,#00DCFF);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  flex: 1 1 auto; 
-   text-align: center;
-}
-
-.detalle-inner .tab-btn:hover {
-  background: linear-gradient(135deg,#007499,#00B0D0);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
-
-.detalle-inner .tab-btn.active {
-  background: linear-gradient(135deg,#00DCFF,#0091B9);
-  color: #fff;
 }
 
 /* =====================
@@ -302,8 +325,9 @@ nav ul li a.active::after {
 main.main-background {
   flex: 1;
   position: relative;
-  transition: filter .3s ease;
-  z-index: 1; /* Corregido: z-index bajo para que el modal se vea encima */
+  /* Animación cubic-bezier para el blur del fondo */
+  transition: filter .3s cubic-bezier(.4, 0, .2, 1);
+  z-index: 1;
 }
 
 main.main-background.blur-background {
@@ -312,7 +336,8 @@ main.main-background.blur-background {
 
 .main-background,
 header {
-  transition: filter 0.4s ease;
+  /* Animación cubic-bezier para el blur */
+  transition: filter 0.4s cubic-bezier(.4, 0, .2, 1);
   z-index: 999;
 }
 
@@ -327,7 +352,8 @@ header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  /* Animación cubic-bezier para las secciones SPA */
+  transition: transform 0.5s cubic-bezier(.4, 0, .2, 1), opacity 0.5s cubic-bezier(.4, 0, .2, 1);
   opacity: 0;
   transform: translateX(100%);
   z-index: 1;
@@ -383,11 +409,11 @@ footer {
   flex-direction: column;
   align-items: center;
   justify-content: flex-center;
-  min-height: calc(100vh - 70px); /* resto el header */
+  min-height: calc(100vh - 70px);
   background: linear-gradient(
     to bottom,
-    #0091B9 100px,  /* empieza más abajo que el header */
-    #0091B9 180px,  /* define la franja azul superior */
+    #0091B9 100px, 
+    #0091B9 180px,  
     #eaf7fb 280px,
     #ffffff 100%
   );
@@ -473,11 +499,56 @@ footer {
   margin: 4px 0;
 }
 
+.personal-trips {
+  background: linear-gradient(135deg, #0091B9, #00DCFF);
+  border-radius: 12px; 
+  padding: 20px 25px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+  width: 100%;
+  max-width: 900px; 
+  margin: 20px auto 0 auto; 
+  text-align: center;
+}
+
+.personal-trips h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.personal-trips p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #eaf7fb;
+}
+
+.personal-trips .btn-mail {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;        
+  border-radius: 25px;        
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0091B9;
+  text-decoration: none;
+  background: #fff;
+  /* Animación cubic-bezier para el botón de mail */
+  transition: background 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.2s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s cubic-bezier(.4, 0, .2, 1);
+}
+
+.personal-trips .btn-mail:hover {
+  background: #e6e6e6;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
 /* =====================
    Destinos y Cards
 ===================== */
 .section.destinos {
-  padding: 100px 20px 60px;
+  padding: 60px 20px 100px;
   background: linear-gradient(to bottom, #eaf7fb, #ffffff);
   min-height: 100vh;
   display: flex;
@@ -508,7 +579,8 @@ footer {
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   cursor: pointer;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Animación cubic-bezier para la card del tour */
+  transition: transform 0.3s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .tour-card:hover {
@@ -549,23 +621,6 @@ footer {
   color: #fff;
 }
 
-.tour-card .text-wrapper button {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg, #0091B9, #00DCFF);
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tour-card .text-wrapper button:hover {
-  background: linear-gradient(135deg, #007499, #00B0D0);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
 
 /* =====================
    Reseñas
@@ -655,7 +710,8 @@ footer {
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  /* Animación cubic-bezier para el botón de mail */
+  transition: background 0.3s cubic-bezier(.4, 0, .2, 1), transform 0.2s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .cta-experiencia .btn-mail:hover {
@@ -694,18 +750,12 @@ footer {
   display: block;
   border-radius: 12px;
   object-fit: cover;
+  /* Animación cubic-bezier para la imagen de surf */
+  transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .surf-card img:hover {
   transform: scale(1.05);
-}
-
-@media (max-width: 900px) {
-  .surftrips-gallery { column-count: 2; }
-}
-
-@media (max-width: 600px) {
-  .surftrips-gallery { column-count: 1; }
 }
 
 .surf-info {
@@ -732,8 +782,8 @@ footer {
   justify-content: center;
   max-width: 900px;
   margin: 0 auto;
-  row-gap: 40px; /* espacio vertical entre QR, redes y formulario */
-  padding: 20px; /* opcional para que no quede pegado al borde */
+  row-gap: 40px; 
+  padding: 20px; 
 }
 
 /* QR */
@@ -742,7 +792,8 @@ footer {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease;
+  /* Animación cubic-bezier para el QR */
+  transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
 }
 
 .qr-wrapper img:hover {
@@ -751,7 +802,8 @@ footer {
 
 .wa-qr-link img {
   cursor: pointer;
-  transition: transform 0.2s;
+  /* Animación cubic-bezier para el QR de WhatsApp */
+  transition: transform 0.2s cubic-bezier(.4, 0, .2, 1);
 }
 
 .wa-qr-link img:hover {
@@ -763,28 +815,9 @@ footer {
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 40px; /* agrega espacio entre botones y formulario */
-
+  margin-bottom: 40px; 
 }
 
-.redes-sociales a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 700;
-  color: #fff;
-  background: linear-gradient(135deg, #0091B9, #00DCFF);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.redes-sociales a:hover {
-  background: linear-gradient(135deg, #007499, #00B0D0);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
 
 /* =====================
    Formulario Contacto Final
@@ -822,9 +855,10 @@ footer {
   font-family: 'Inter', sans-serif;
   color: #333;
   background: #fff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  height: 44px;          /* fuerza altura uniforme */
-  line-height: 1.2;      /* centra verticalmente el texto */
+  /* Animación cubic-bezier para el formulario */
+  transition: border-color 0.3s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s cubic-bezier(.4, 0, .2, 1);
+  height: 44px;          
+  line-height: 1.2;      
 }
 
 /* Focus */
@@ -850,7 +884,7 @@ footer {
 .formulario-contacto input[type="email"],
 .formulario-contacto input[type="text"] {
   appearance: none;
-  height: 44px;          /* asegura altura igual que los demás */
+  height: 44px;          
   line-height: 1.2;
   padding: 12px 14px;
 }
@@ -864,32 +898,10 @@ footer {
 }
 
 /* Botón */
-.formulario-contacto button {
-  width: 100%;
-  padding: 12px 0;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(135deg, #0091B9, #00DCFF);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.formulario-contacto button:hover {
-  background: linear-gradient(135deg, #007499, #00B0D0);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-}
 
 @media (max-width: 600px) {
   header .logo img {
     height: 55px;
   }
 }
-@media (max-width: 768px) {
-  .detalle-inner .tabs {
-    overflow-x: auto;
-  }
-}
+
