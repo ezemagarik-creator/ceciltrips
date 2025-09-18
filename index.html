@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="page_title">Cecilia Kovacs Tours</title>
+<title data-i18n="page_title">EM MN Tours</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script type="text/javascript"
@@ -31,9 +31,9 @@
     </ul>
   </nav>
   <div class="lang-switch">
-    <button class="flag-btn" data-lang="es">ES</button>
-    <button class="flag-btn" data-lang="en">EN</button>
-    <button class="flag-btn" data-lang="pt">BR</button>
+    <button class="flag-btn" data-lang="es">🇦🇷</button>
+    <button class="flag-btn" data-lang="en">🇺🇸</button>
+    <button class="flag-btn" data-lang="pt">🇧🇷</button>
   </div>
 </header>
 
@@ -64,6 +64,13 @@
           </div>
         </div>
       </div>
+
+<div class="tips personal-trips">
+  <h3>Trips personalizados</h3>
+  <p>Si querés un viaje a medida, contáctanos y lo armamos juntos.</p>
+<a href="#contacto" class="btn-mail">Contactanos</a>
+</div>
+
     </div>
   </section>
 
@@ -74,28 +81,28 @@
         <img class="image" src="buzios.jpg" alt="Búzios">
         <div class="text-wrapper">
           <h3 data-i18n="dest_buzios">Búzios</h3>
-          <button data-i18n="btn_info">Más Info</button>
+          <button class="btn-unificado" data-i18n="btn_info">Más Info</button>
         </div>
       </div>
       <div class="tour-card" data-destino="Río de Janeiro">
         <img class="image" src="rio.jpg" alt="Río de Janeiro">
         <div class="text-wrapper">
           <h3 data-i18n="dest_rio">Río de Janeiro</h3>
-          <button data-i18n="btn_info">Más Info</button>
+          <button class="btn-unificado" data-i18n="btn_info">Más Info</button>
         </div>
       </div>
       <div class="tour-card" data-destino="Ilha Grande">
         <img class="image" src="ilha.jpg" alt="Ilha Grande">
         <div class="text-wrapper">
           <h3 data-i18n="dest_ilha">Ilha Grande</h3>
-          <button data-i18n="btn_info">Más Info</button>
+          <button class="btn-unificado" data-i18n="btn_info">Más Info</button>
         </div>
       </div>
       <div class="tour-card" data-destino="Arraial do Cabo">
         <img class="image" src="arraial.jpg" alt="Arraial do Cabo">
         <div class="text-wrapper">
           <h3 data-i18n="dest_arraial">Arraial do Cabo</h3>
-          <button data-i18n="btn_info">Más Info</button>
+          <button class="btn-unificado" data-i18n="btn_info">Más Info</button>
         </div>
       </div>
     </div>
@@ -145,9 +152,9 @@
     </div>
 
     <div class="redes-sociales">
-      <a href="https://instagram.com/ceciltrips" target="_blank" data-i18n="social_instagram">Instagram</a>
-      <a href="https://facebook.com/ceci.kovacs.5" target="_blank" data-i18n="social_facebook">Facebook</a>
-      <a href="https://ceciltrips.bokun.io" target="_blank" data-i18n="social_reservas">Bokun</a>
+      <a href="https://instagram.com/gary.of" target="_blank" class="btn-unificado" data-i18n="social_instagram">Instagram</a>
+      <a href="https://facebook.com" target="_blank" class="btn-unificado" data-i18n="social_facebook">Facebook</a>
+      <a href="https://ceciltrips.bokun.io" target="_blank" class="btn-unificado" data-i18n="social_reservas">Bokun</a>
     </div>
 
     <form class="formulario-contacto">
@@ -179,7 +186,7 @@
       <label for="vuelo" data-i18n="form_vuelo_label">Si es desde o al aeropuerto, info del vuelo:</label>
       <input type="text" id="vuelo" name="vuelo" data-i18n-ph="form_vuelo_ph">
 
-      <button type="submit" data-i18n="btn_send">Enviar</button>
+      <button type="submit" class="btn-unificado" data-i18n="btn_send">Enviar</button>
     </form>
   </div>
 </section>
@@ -190,11 +197,11 @@
     <div class="modal-header">
       <h2 id="detalle-titulo">Destino</h2> 
 <div class="tabs">
-  <button class="tab-btn" data-tab="hospedaje" data-i18n="tab_hospedaje">Hospedaje</button>
-  <button class="tab-btn" data-tab="tours" data-i18n="tab_tours">Tours</button>
-  <button class="tab-btn" data-tab="transfers" data-i18n="tab_transfers">Transfers</button>
+  <button class="tab-btn btn-unificado"  data-tab="hospedaje" data-i18n="tab_hospedaje">Hospedaje</button>
+  <button class="tab-btn btn-unificado"  data-tab="tours" data-i18n="tab_tours">Tours</button>
+  <button class="tab-btn btn-unificado"  data-tab="transfers" data-i18n="tab_transfers">Transfers</button>
 </div>
-      <button id="volver-btn" data-i18n="volver_btn">Volver</button>
+      <button id="volver-btn" button class="tab-btn btn-unificado" data-i18n="volver_btn">Volver</button>
     </div>
     <div id="hospedaje" class="tab-content"></div>
     <div id="tours" class="tab-content"></div>
@@ -202,7 +209,7 @@
   </div>
 </div>
 
-<footer>© 2025 Cecilia Kovacs Tours. Todos los derechos reservados.</footer>
+<footer>© 2025 Ezequiel Magarik Web. Todos los derechos reservados.</footer>
 <script src="script.js"></script>
 </body>
 </html>
